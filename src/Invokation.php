@@ -2,22 +2,17 @@
 
 namespace oopapi;
 
-class Invokation extends RequestHandler {
-    const CLASS_VARIABLE = '__CLASS__';
-    protected $class;
-
-    public function __construct(RequestHandler $successor = NULL) {
-        parent::__construct($successor);
-        $this->class = $_POST[self::CLASS_VARIABLE];
-    }
-
+abstract class Invokation extends RequestHandler {
     protected function invoke() {
-        $object = new $this->class;
+        $class  = $this->getClassName();
+        $object = new $class;
         if ($object instanceof Invokable) {
             return $object();
         }
         else {
-            throw new NonInvokableException($this->class);
+            throw new NonInvokableException($class);
         }
     }
+    
+    abstract protected function getClassName();
 }
