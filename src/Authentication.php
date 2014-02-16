@@ -2,4 +2,8 @@
 
 namespace oopapi;
 
-abstract class Authentication extends RequestHandler {}
+class Authentication extends RequestHandler {
+    protected function invoke() {
+        throw new AuthenticationException();
+    }
+}
