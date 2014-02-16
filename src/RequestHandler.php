@@ -23,7 +23,7 @@ abstract class RequestHandler implements Invokable {
 
     protected function pass($retval) {
         if (isset($this->successor)) {
-            $this->successor();
+            $this->successor->__invoke();
         }
     }
     
