@@ -4,7 +4,7 @@ namespace oopapi;
 
 abstract class Invokation extends RequestHandler {
     protected function invoke() {
-        $class  = $this->getClassName();
+        $class  = $this->getClass();
         $object = new $class;
         if ($object instanceof Invokable) {
             return $object();
@@ -14,5 +14,5 @@ abstract class Invokation extends RequestHandler {
         }
     }
     
-    abstract protected function getClassName();
+    abstract protected function getClass();
 }
