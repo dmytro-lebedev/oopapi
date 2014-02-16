@@ -1,10 +1,8 @@
 <?php
 
-namespace oopapi;
-
 require_once './Invokable.php';
+require_once './NonInvokableException.php';
 require_once './RequestHandler.php';
 require_once './Invokation.php';
-
-$handler = new Invokation();
-$handler();
+require_once './Authentication.php';
+require_once './Authorization.php';
