@@ -3,5 +3,5 @@
 use oopapi\Authorization;
 
 class NoAuthorization extends Authorization {
-    protected function invoke() {}
+    protected function handle() {}
 }

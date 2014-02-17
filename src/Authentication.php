@@ -3,7 +3,7 @@
 namespace oopapi;
 
 class Authentication extends RequestHandler {
-    protected function invoke() {
+    protected function handle() {
         throw new AuthenticationException();
     }
 }
