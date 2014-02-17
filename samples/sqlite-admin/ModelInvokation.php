@@ -10,11 +10,11 @@ class ModelInvokation extends Invokation {
         return $this->getModel();
     }
     
-    private function getTable() {
-        return $_GET['table'];
-    }
-    
     private function getModel() {
         return "Db{$this->getTable()}";
+    }
+
+    private function getTable() {
+        return $_GET['table'];
     }
 }
