@@ -1,4 +1,4 @@
 oopapi
 ======
 
-Object-oriented PHP API
+Object-oriented PHP API Library
