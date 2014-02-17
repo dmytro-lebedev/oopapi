@@ -4,7 +4,17 @@ use oopapi\Authentication;
 use oopapi\AuthenticationException;
 
 class BasicHttpAuthentication extends Authentication {
+    public function __destruct() {
+        $this->logout();
+    }
+
+    private function logout() {
+        unset($_SERVER['PHP_AUTH_USER']);
+        unset($_SERVER['PHP_AUTH_PW']);
+    }
+
     protected function handle() {
+        $this->logout();
         if (empty($this->getUser())) {
             throw new AuthenticationException('Anonymous access forbidden');
         }
@@ -27,8 +37,8 @@ class BasicHttpAuthentication extends Authentication {
     }
     
     protected function fail(\Exception $e) {
-        $this->login();
         DbLog::log($e);
+        $this->login();
     }
     
     private function login() {
