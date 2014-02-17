@@ -12,7 +12,7 @@ abstract class RequestHandler implements Invokable {
     public function __invoke() {
         try {
             $retval = $this->handle();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->fail($e);
             return;
         }

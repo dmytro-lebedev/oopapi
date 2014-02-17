@@ -29,7 +29,6 @@ class BasicHttpAuthentication extends Authentication {
     protected function fail(\Exception $e) {
         $this->login();
         DbLog::log($e);
-        parent::fail($e);
     }
     
     private function login() {

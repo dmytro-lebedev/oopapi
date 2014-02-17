@@ -17,6 +17,5 @@ class GroupAuthorization extends Authorization {
     
     protected function fail(\Exception $e) {
         DbLog::log($e);
-        parent::fail($e);
     }
 }
