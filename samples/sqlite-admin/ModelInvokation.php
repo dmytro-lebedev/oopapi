@@ -13,8 +13,8 @@ class ModelInvokation extends Invokation {
     private function getModel() {
         return "Db{$this->getTable()}";
     }
-
+    
     private function getTable() {
-        return $_GET['table'];
+        return ucfirst(HttpGetRequest::getTable());
     }
 }

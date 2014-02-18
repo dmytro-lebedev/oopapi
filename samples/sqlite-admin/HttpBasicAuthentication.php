@@ -3,7 +3,7 @@
 use oopapi\Authentication;
 use oopapi\AuthenticationException;
 
-class BasicHttpAuthentication extends Authentication {
+class HttpBasicAuthentication extends Authentication {
     public function __destruct() {
         $this->logout();
     }
@@ -14,11 +14,10 @@ class BasicHttpAuthentication extends Authentication {
     }
 
     protected function handle() {
-        $this->logout();
         if (empty($this->getUser())) {
             throw new AuthenticationException('Anonymous access forbidden');
         }
-        if (!DbUser::match($this->getUser(), $this->getPassword())) {
+        if (!(new DbUser())->match($this->getUser(), $this->getPassword())) {
             throw new AuthenticationException('User/password do not match');
         }
     }
@@ -32,12 +31,12 @@ class BasicHttpAuthentication extends Authentication {
     }
 
     protected function pass($retval) {
-        DbLog::log('Authenticated successfully');
+        (new DbLog)->log('Logged in');
         parent::pass($retval);
     }
     
     protected function fail(\Exception $e) {
-        DbLog::log($e);
+        (new DbLog)->log($e);
         $this->login();
     }
     

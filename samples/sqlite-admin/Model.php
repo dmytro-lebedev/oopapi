@@ -3,10 +3,11 @@
 use oopapi\Invokable;
 
 abstract class Model implements Invokable {
-    protected $sqlite3;
+    protected $db;
 
     public function __construct() {
-        $this->sqlite3 = new SQLite3('sqlite-admin.sqlite3');
+        $this->db = new SQLite3('./sqlite-admin.sqlite3');
+        $this->create();
     }
     
     public function __invoke() {
@@ -14,10 +15,19 @@ abstract class Model implements Invokable {
     }
 
     private function invokeCommand() {
-        $this->{$this->getCommand()}();
+        $this->{HttpGetRequest::getCommand()}();
+    }
+    
+    protected function echoResult(SQLite3Result $result) {
+        while ($rec = $result->fetchArray(SQLITE3_ASSOC)) {
+            print_r($rec);
+            echo '<br>';
+        }
     }
 
-    private function getCommand() {
-        return $_GET['command'];
-    }
+    abstract protected function create();
+    abstract protected function select();
+    abstract protected function insert();
+    abstract protected function update();
+    abstract protected function delete();
 }
